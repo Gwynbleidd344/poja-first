@@ -30,7 +30,7 @@ public class CalcController {
     }
 
     @GetMapping("/divide")
-    public int divide(@RequestParam int a, @RequestParam int b) {
+    public double divide(@RequestParam int a, @RequestParam int b) {
         return calcService.divide(a, b);
     }
 }
