@@ -12,18 +12,15 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import test.poja.first.endpoint.rest.controller.calculus.CalcController;
 import test.poja.first.service.CalcService;
 
 @ExtendWith(MockitoExtension.class)
 class CalcControllerTest {
 
-  @Mock
-  private CalcService calcService;
+  @Mock private CalcService calcService;
 
-  @InjectMocks
-  private CalcController calcController;
+  @InjectMocks private CalcController calcController;
 
   private MockMvc mockMvc;
 
@@ -36,7 +33,8 @@ class CalcControllerTest {
   void add_shouldReturnSum() throws Exception {
     when(calcService.add(2, 3)).thenReturn(5);
 
-    mockMvc.perform(get("/add").param("a", "2").param("b", "3"))
+    mockMvc
+        .perform(get("/add").param("a", "2").param("b", "3"))
         .andExpect(status().isOk())
         .andExpect(content().string("5"));
   }
@@ -45,7 +43,8 @@ class CalcControllerTest {
   void add_shouldHandleNegativeNumbers() throws Exception {
     when(calcService.add(-5, 3)).thenReturn(-2);
 
-    mockMvc.perform(get("/add").param("a", "-5").param("b", "3"))
+    mockMvc
+        .perform(get("/add").param("a", "-5").param("b", "3"))
         .andExpect(status().isOk())
         .andExpect(content().string("-2"));
   }
@@ -54,7 +53,8 @@ class CalcControllerTest {
   void subtract_shouldReturnDifference() throws Exception {
     when(calcService.subtract(10, 4)).thenReturn(6);
 
-    mockMvc.perform(get("/subtract").param("a", "10").param("b", "4"))
+    mockMvc
+        .perform(get("/subtract").param("a", "10").param("b", "4"))
         .andExpect(status().isOk())
         .andExpect(content().string("6"));
   }
@@ -63,7 +63,8 @@ class CalcControllerTest {
   void subtract_shouldHandleNegativeResult() throws Exception {
     when(calcService.subtract(3, 10)).thenReturn(-7);
 
-    mockMvc.perform(get("/subtract").param("a", "3").param("b", "10"))
+    mockMvc
+        .perform(get("/subtract").param("a", "3").param("b", "10"))
         .andExpect(status().isOk())
         .andExpect(content().string("-7"));
   }
@@ -72,7 +73,8 @@ class CalcControllerTest {
   void multiply_shouldReturnProduct() throws Exception {
     when(calcService.multiply(4, 5)).thenReturn(20);
 
-    mockMvc.perform(get("/multiply").param("a", "4").param("b", "5"))
+    mockMvc
+        .perform(get("/multiply").param("a", "4").param("b", "5"))
         .andExpect(status().isOk())
         .andExpect(content().string("20"));
   }
@@ -81,7 +83,8 @@ class CalcControllerTest {
   void multiply_shouldHandleZero() throws Exception {
     when(calcService.multiply(0, 999)).thenReturn(0);
 
-    mockMvc.perform(get("/multiply").param("a", "0").param("b", "999"))
+    mockMvc
+        .perform(get("/multiply").param("a", "0").param("b", "999"))
         .andExpect(status().isOk())
         .andExpect(content().string("0"));
   }
@@ -90,7 +93,8 @@ class CalcControllerTest {
   void multiply_shouldHandleNegativeNumbers() throws Exception {
     when(calcService.multiply(-3, 4)).thenReturn(-12);
 
-    mockMvc.perform(get("/multiply").param("a", "-3").param("b", "4"))
+    mockMvc
+        .perform(get("/multiply").param("a", "-3").param("b", "4"))
         .andExpect(status().isOk())
         .andExpect(content().string("-12"));
   }
@@ -99,7 +103,8 @@ class CalcControllerTest {
   void divide_shouldReturnQuotient() throws Exception {
     when(calcService.divide(10, 2)).thenReturn(5.0);
 
-    mockMvc.perform(get("/divide").param("a", "10").param("b", "2"))
+    mockMvc
+        .perform(get("/divide").param("a", "10").param("b", "2"))
         .andExpect(status().isOk())
         .andExpect(content().string("5.0"));
   }
@@ -108,7 +113,8 @@ class CalcControllerTest {
   void divide_shouldReturnDecimalResult() throws Exception {
     when(calcService.divide(7, 2)).thenReturn(3.5);
 
-    mockMvc.perform(get("/divide").param("a", "7").param("b", "2"))
+    mockMvc
+        .perform(get("/divide").param("a", "7").param("b", "2"))
         .andExpect(status().isOk())
         .andExpect(content().string("3.5"));
   }

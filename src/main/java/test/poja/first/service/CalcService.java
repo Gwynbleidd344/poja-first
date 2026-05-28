@@ -1,7 +1,6 @@
 package test.poja.first.service;
 
 import org.springframework.stereotype.Service;
-import java.lang.ArithmeticException;
 
 @Service
 public class CalcService {
