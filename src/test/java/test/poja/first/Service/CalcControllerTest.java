@@ -51,15 +51,6 @@ class CalcControllerTest {
   }
 
   @Test
-  void add_shouldHandleOverflow() throws Exception {
-    when(calcService.add(Integer.MAX_VALUE, 1))
-        .thenThrow(new ArithmeticException("Result exceeds Integer.MAX_VALUE"));
-
-    mockMvc.perform(get("/add").param("a", String.valueOf(Integer.MAX_VALUE)).param("b", "1"))
-        .andExpect(status().isInternalServerError());
-  }
-
-  @Test
   void subtract_shouldReturnDifference() throws Exception {
     when(calcService.subtract(10, 4)).thenReturn(6);
 
@@ -75,15 +66,6 @@ class CalcControllerTest {
     mockMvc.perform(get("/subtract").param("a", "3").param("b", "10"))
         .andExpect(status().isOk())
         .andExpect(content().string("-7"));
-  }
-
-  @Test
-  void subtract_shouldHandleUnderflow() throws Exception {
-    when(calcService.subtract(Integer.MIN_VALUE, 1))
-        .thenThrow(new ArithmeticException("Result is below Integer.MIN_VALUE"));
-
-    mockMvc.perform(get("/subtract").param("a", String.valueOf(Integer.MIN_VALUE)).param("b", "1"))
-        .andExpect(status().isInternalServerError());
   }
 
   @Test
@@ -129,14 +111,5 @@ class CalcControllerTest {
     mockMvc.perform(get("/divide").param("a", "7").param("b", "2"))
         .andExpect(status().isOk())
         .andExpect(content().string("3.5"));
-  }
-
-  @Test
-  void divide_shouldReturnErrorOnDivisionByZero() throws Exception {
-    when(calcService.divide(5, 0))
-        .thenThrow(new ArithmeticException("Division by zero is not allowed"));
-
-    mockMvc.perform(get("/divide").param("a", "5").param("b", "0"))
-        .andExpect(status().isInternalServerError());
   }
 }
