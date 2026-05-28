@@ -34,11 +34,11 @@ public class CalcService {
   private void checkOverflow(long result) {
     if (result > Integer.MAX_VALUE) {
       throw new ArithmeticException(
-        "Result exceeds Integer.MAX_VALUE (" + Integer.MAX_VALUE + "): " + result);
+          "Result exceeds Integer.MAX_VALUE (" + Integer.MAX_VALUE + "): " + result);
     }
     if (result < Integer.MIN_VALUE) {
       throw new ArithmeticException(
-        "Result is below Integer.MIN_VALUE (" + Integer.MIN_VALUE + "): " + result);
+          "Result is below Integer.MIN_VALUE (" + Integer.MIN_VALUE + "): " + result);
     }
   }
 }
